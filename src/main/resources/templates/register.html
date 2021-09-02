@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Greens Smart | Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styleLogin.css}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <!-- <img class="wave" th:src="@{images/wave.png}"> -->
+    <div class="container">
+        <div class="img">
+            <img th:src="@{/images/mobileLogin.svg}">
+        </div>
+        <div class="login-content">
+
+            <form th:action="@{/greens/register}" method="POST" th:object="${account}">
+                <a style="display: flex; justify-content: center; flex-direction: column;" th:href="@{/greens/home}">
+                    <img th:src="@{/images/avata.svg}">
+                    <h2 class="title">Greens Mart</h2>
+                </a>
+                <small>[[${message}]]</small>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>[[#{regis.username}]]</h5>
+                        <input type="text" name="username" th:field="*{username}" class="input">
+                       
+                    </div>
+                   
+                </div>
+                <div style="text-align: left; color: red;">
+                  
+                    <small th:if="${#fields.hasErrors('username')}"	id="namehelp" class="form-text text-muted">Tên đăng nhập tối thiểu 6 kí tự</small>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>[[#{regis.pass}]]</h5>
+                        <input type="password" name="password" th:field="*{password}" class="input">
+                    </div>
+                </div>
+                <div style="text-align: left; color: red;">
+                  
+                    <small th:if="${#fields.hasErrors('password')}"	id="namehelp" class="form-text text-muted">Mật khẩu tối thiểu 6 kí tự</small>
+                </div>
+                <div class="input-div email">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>[[#{regis.email}]]</h5>
+                        <input type="email" name="email" th:field="*{email}" class="input">
+                        
+                    </div>
+                </div>
+                <div style="text-align: left; color: red;">
+                  
+                    <small th:if="${#fields.hasErrors('email')}"	id="namehelp" class="form-text text-muted">Sai định dạng email</small>
+                </div>
+                <div class="input-div fullname">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>[[#{regis.fullName}]] </h5>
+                        <input type="texxt" name="fullname" th:field="*{fullname}" class="input">
+                    </div>
+                </div>
+                <div style="text-align: left; color: red;">
+                  
+                    <small th:if="${#fields.hasErrors('fullname')}"	id="namehelp" class="form-text text-muted">Không được để trống họ và tên</small>
+                </div>
+                <a th:href="@{/greens/security/login/form}">[[#{regis.login}]]</a>
+                <input type="submit" class="btn" th:value="#{btn.register}">
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

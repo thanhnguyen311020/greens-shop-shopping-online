@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<main>
+
+		
+		<div class="product-list-container">
+
+
+			<aside class="categories">
+				 <!-- heading -->
+			
+				 <div class="arrival-heading">
+					<strong>[[#{prod.category}]]</strong>
+					<p></p>
+				  </div>
+				<ul>
+					<li>
+						<a style="display: inline-block; width: 100%;" 
+						 th:href="@{|/greens/product/page/${currentPage}?sortField=name&sortDir=asc&keyword=|}">Tất Cả</a>
+					</li>
+					<li th:each="item: ${categories}">
+						<a  value="item.id"  th:href="@{|/greens/product/page/1?sortField=name&sortDir=${reverseSortDir}&keyword=${item.name}|}" style="display: inline-block; width: 100%;" 
+						>[[${item.name}]]</a>
+					</li>
+					
+				</ul>
+			</aside>
+	
+
+			<section class="new-arrival list-product">
+	
+				<!-- heading -->
+				<div th:if="${products != null}" class="arrival-heading">
+					<strong>[[#{prod.allProduct}]]</strong>
+					<p>We Provide You New Disgn Fashion Clother</p>
+					<div class="sortBy">
+						<div class="form-group form-inline">
+					
+						  <select class="form-control" name="sortBy"  id="sortBy" th:onchange="location = this.value;">
+							  <option><a href="/greens/product">Sắp xếp theo</a></option>
+							<option th:value="@{@{|/greens/product/page/${currentPage}?sortField=discount&sortDir=${reverseSortDir}&${keyword != null ? 'keyword='+keyword : ''}|}}">Giảm giá</option>
+							<option th:value="@{@{|/greens/product/page/${currentPage}?sortField=name&sortDir=${reverseSortDir}&${keyword != null ? 'keyword='+keyword : ''}|}}">Tên</option>
+							<option th:value="@{@{|/greens/product/page/${currentPage}?sortField=price&sortDir=asc&${keyword != null ? 'keyword='+keyword : ''}|}}"><a>Giá thấp - cao</a></option>
+							<option th:value="@{@{|/greens/product/page/${currentPage}?sortField=price&sortDir=desc&${keyword != null ? 'keyword='+keyword : ''}|}}"><a>Giá cao - thấp</a></option>
+	
+						  </select>
+						</div>
+					</div>
+				</div>
+				<div th:if="${products == null}" class="arrival-heading">
+					<strong>[[#{prod.noProduct}]]</strong>
+					<p>We Provide You New Disgn Fashion Clother</p>
+
+					
+				</div>
+
+				
+
+				<!-- Product-container -->
+				<div class="product-container">
+					<!-- product-box-1 -->
+					<div class="product-box" th:each="item: ${products}">
+	
+						<!-- img -->
+						<div class="product-img">
+							<!-- add-to-cart -->
+							<a  th:if="${item.quantity >0}" th:attr="ng-click= @{|cart.add(${item.id})|}" class="add-cart">
+								<i   class="fas fa-shopping-cart"></i>
+							</a>
+							<!-- <a  class="discount">
+								<span>12%</span>
+							</a> -->
+	
+							<img th:src="@{|/images/${item.image}|}" alt="">
+							<div th:if="${item.quantity ==0}"  class="soldOut">
+								<img src="/images/icon_hethang.png" alt="">
+							</div>
+						</div>
+	
+						<!-- details -->
+						<div class="product-details">
+							<a th:href="@{|/greens/product/detail/${item.id}|}" class="p-name" style="width: 200px; text-align: center; height: 30px;">[[${item.name}]]</a>
+							<span th:if="${item.discount>0}" class="p-price" style="margin-top: 20px; color: #0b9d8a;"><strike style="color: black;">[[${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}]].đ </strike> - [[${#numbers.formatDecimal(item.price*((100-item.discount)/100), 0, 'COMMA', 0, 'POINT')}]].đ </span>
+							<span th:unless="${item.discount>0}" class="p-price" style="margin-top: 20px; color: #0b9d8a;">[[${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}]].đ </span>
+						</div>
+	
+					</div>
+	
+				
+					
+	
+				</div>
+	
+				<!-- <div class="page-btn">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>&#8594</span>
+				</div> -->
+				<!-- <input type="text" name="ids" th:value="${ids}"> -->
+				
+				<div class="arrival-heading">
+					<nav style="color: black;" aria-label="Page navigation example m-auto" th:if="${totalPages > 1}">
+				
+						<ul class="pagination">
+							
+							<li class="page-item">
+								<a class="page-link"  th:href="@{|/greens/product/page/1?sortField=${sortField}&sortDir=${sortDir}|}">
+									First <!-- <span th:unless="${currentPage > 1}">First</span> -->
+								</a>
+							</li>
+						
+							<li class="page-item">
+								<a class="page-link"  th:href="@{|/greens/product/page/${currentPage - 1}?sortField=${sortField}&sortDir=${sortDir}|}">
+									<!-- <span th:unless="${currentPage > 1}">Previous</span> -->Previous
+								</a>
+							</li>
+							<li class="page-item">
+								<span class="page-link">Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]] </span>
+								
+							</li>
+							<!--<li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}">
+								<a class="page-link"  th:href="@{|/greens/product/page/${i}?sortField=${sortField}&sortDir=${sortDir}&${keyword != null ? 'keyword='+keyword : ''}|}">[[${i}]]</a>
+								 <span th:unless="${i != currentPage}">[[${i}]]</span> 
+							</li>-->
+						
+							<li class="page-item" th:if ="${currentPage < totalPages}">
+								<a class="page-link"  th:href="@{|/greens/product/page/${currentPage + 1}?sortField=${sortField}&sortDir=${sortDir}&${keyword != null ? 'keyword='+keyword : ''}|}">Next</a>
+							</li>
+							<li th:unless ="${currentPage < totalPages}" class="page-item">
+								<a class="page-link"  style=" pointer-events: none;">Next</a>
+							</li>
+							
+							<li class="page-item" th:if ="${currentPage < totalPages}">
+								<a class="page-link"  th:href="@{|/greens/product/page/${totalPages}?sortField=${sortField}&sortDir=${sortDir}|}">Last</a>
+							</li>
+							<li class="page-item" th:unless ="${currentPage < totalPages}">
+								<a class="page-link" style=" pointer-events: none;" >Last</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				
+			</section>
+	
+		</div>
+	</main>
+	
+</body>
+</html>
+
+<!-- <div class="page_navigation " th:if="${productPage.totalPages > 0}"
+					style="display: flex; justify-content: center; margin-top:20px">
+					<form action="">
+						<div th:if="${productPage.totalPages>1}" class="form-inline mr-5">
+							<label for="size">Xem:</label>
+							<select class="form-control" id="size" name="size" onchange="this.form.submit()">
+								<option th:selected="${productPage.size==9}" value="9">9</option>
+								<option th:selected="${productPage.size==18}" value="18">18</option>
+								<option th:selected="${productPage.size==32}" value="32">32</option>
+								<option th:selected="${productPage.size==64}" value="64">64</option>
+								<option th:selected="${productPage.size==120}" value="120">120</option>
+							</select>
+						</div>
+					</form>
+		
+					<nav aria-label="Page navigation example col m-auto">
+						<ul class="pagination m-auto">
+							<li th:if="${productPage.totalPages>1}"
+								th:class="${1 == productPage.number +1}? 'page-item active' : 'page-item'">
+								<a class="page-link"
+									th:href="@{/greens/product(name=${name}, id=${id}, size=${productPage.size}, page=${1})}">First</a>
+							</li>
+							<li th:each="pageNumber : ${pageNumbers}" th:if="${productPage.totalPages > 1 }"
+								th:class="${pageNumber == productPage.number + 1} ? 'page-item active':'page-item'">
+								<a class="page-link"
+									th:href="@{/greens/product(name=${name}, id=${id}, size=${productPage.size}, page=${pageNumber})}"
+									th:text="${pageNumber}"></a>
+								
+							</li>
+							<li th:if="${productPage.totalPages>1}"
+								th:class="${productPage.totalPages == productPage.number + 1} ? 'page-item active' : 'page-item'">
+								<a class="page-link"
+									th:href="@{/greens/product(name=${name}, id=${id}, size=${productPage.size}, page=${productPage.totalPages})}">Last</a>
+							</li>
+						</ul>
+					</nav>
+				</div> -->

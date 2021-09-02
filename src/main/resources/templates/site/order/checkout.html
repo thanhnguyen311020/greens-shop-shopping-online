@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<main>
+
+        
+
+    <div class="small_container single_product" style="margin-bottom: 30px; padding: 10px 25px;">
+        <div class="title_page">
+            <p>
+                <a href="">GIỎ HÀNG</a> >
+                <a style="color:#555" href="">THANH TOÁN</a> > <a href="">ĐẶT HÀNG THÀNH CÔNG</a>
+            </p>
+        </div>
+       
+        <form action="#"  method="post">
+            <div class="_row">
+                <div class="col_2 info_checkout">
+                    <div>
+                        <h4 class="check_product">đơn hàng của bạn</h4>
+                    </div>
+                    <table >
+                        <tr >
+                            <th style="background:#fff; color: rgb(0, 0, 0);font-weight: 600;">SẢN PHẨM</th>
+                            <th style="background:#fff;  color: rgb(0, 0, 0);font-weight: 600; text-align: right;">TẠM TÍNH</th>
+                        </tr>
+                        <tr ng-repeat="item in cart.items">
+                            <td style="color: #7e7e7e;">{{item.name}}</td>
+                            <td style="color: #7e7e7e; text-align: right;">{{item.price | number }}.đ</td>
+                        </tr>
+                        <tr >
+                            <th style="background:#fff; color: rgb(0, 0, 0); margin: 0 10px;font-weight: 600; ">Tạm tính</th>
+                            <th style="background:#fff; color: rgb(0, 0, 0); margin: 0 10px;font-weight: 600; text-align: right; ">
+                               {{cart.amount | number }}.đ</th>
+                        </tr>
+
+                        <tr  >
+                            <td style="color: #7e7e7e;">Giao Hàng</td>
+                            <td style="text-align: right;color: #7e7e7e;">30.000 VND</td>
+                        </tr>
+
+                        <tr >
+                            <th style="background:#fff; color: #ff623b; font-weight: 700;font-size: 1.2rem; margin: 0 10px;">Tổng Tiền
+                            </th>
+                            <th style="background:#fff; color: #ff623b; font-weight: 700;font-size: 1.2rem; margin: 0 10px; text-align: right;">
+                               {{cart.amount + 30 | number }}.đ</th>
+                        </tr>
+
+                    </table>
+                    <div>
+                        <ul>
+                            <li>
+                                <div style="display: flex;align-items: center;">
+                                    <input style="width: 20px;" type="radio" id="checkOut"><label for="checkOut">Thanh
+                                        toán khi nhận hàng</label>
+                                </div>
+                            </li>
+                            <li>
+                                <small>Trả tiền mặt khi nhận hàng</small>
+                            </li>
+                            <li>
+                                <input style="border-radius: 0px; border: none; cursor: pointer;" class="btn_banner" ng-click="order.purchase()" type="button" name="" id="" value="Đặt Hàng">
+                            </li>
+                            <li>
+                                <p>Chính sách miễn phí dùng thử và đổi trả 07 ngày, bảo hành 30 ngày. Các chính sách bảo
+                                    hành & đổi trả, hoàn tiền và giải quyết khiếu nại tuân thủ theo quy định của Matti
+                                    được mô tả ở phần chân trang footer.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="col_2 form_checkout">
+                    <div>
+                        <h4 class="check_product">Đơn hàng của bạn</h4>
+                    </div>
+
+                    <div>
+                        <span>Họ và Tên</span>
+                        <input type="text" th:value="${#request.remoteUser}" readonly id="username"  style="width: 100%;"  >
+                      
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                    <div>
+                        <span>Ngày Mua</span>
+                        <input type="text"  ng:value="order.createDate | date : 'dd-MM-yyyy'" style="width: 100%;" readonly name="name" id="name">
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                    <div>
+                        <span>Số Điện Thoại</span>
+                        <input type="text" style="width: 100%;"  ng-model="order.phone" name="phone" id="phpne">
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                    <div>
+                        <span>Tổng Tiền:</span>
+                        <input style="width: 100%;"
+                            ng-value="cart.amount" readonly
+                            type="text">
+                    </div>
+                    <div>
+                        <span>Địa Chỉ:</span>
+                        <textarea style="width: 100%;" ng-model="order.address" name="address" id="address" cols="30" rows="10"></textarea>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+	
+	</main>
+	
+</body>
+</html>

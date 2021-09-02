@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dashboard(div)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- light-slider-css -->
+    <link rel="stylesheet" href="/css/lightslider.css">
+    <!-- JQuery -->  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/JQuery.js"></script>
+    <!-- light-slider-js -->
+    <script src="/js/lightslider.js"></script>
+    <link rel="stylesheet" th:href="@{/css/dashBoard.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+      
+    <!-- AngularJs -->
+    
+    <!-- <link rel="shortcut icon" href=""> -->
+    <!-- using fontAwesome -->
+    <script src="http://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+   
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+    <div th:replace="admin/sidebar/_navigationmenu.html"></div>
+
+    
+    
+    <div th:replace="${div}" class="home_content"></div>
+
+
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+        let search = document.querySelector(".fa-search");
+
+        btn.onclick = function () {
+            sidebar.classList.toggle("active");
+        }
+        search.onclick = function () {
+            sidebar.classList.toggle("active");
+        }
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#image').change(function () {
+                showImageThumbnail(this);
+            });
+        });
+
+        function showImageThumbnail(fileInput) {
+            file = fileInput.files[0];
+            reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#thumbnail').attr('src', e.target.result);
+            };
+
+            reader.readAsDataUrl(file);
+        }
+
+    </script>
+    
+   
+      <script src="/js/shopping-cart-app.js"></script>
+      <!-- <script src="https://canvasjs.com/assets/script/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script> -->
+    
+     
+       <!--  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script> -->
+</body>
+
+</html>

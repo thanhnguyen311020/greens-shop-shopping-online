@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- light-slider-css -->
+  <link rel="stylesheet" href="/css/lightslider.css">
+  <!-- JQuery -->
+  <script src="/js/JQuery.js"></script>
+  <!-- light-slider-js -->
+  <script src="/js/lightslider.js"></script>
+  <!-- AngularJs -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-animate/1.8.2/angular-animate.min.js"
+    integrity="sha512-jZoujmRqSbKvkVDG+hf84/X11/j5TVxwBrcQSKp1W+A/fMxmYzOAVw+YaOf3tWzG/SjEAbam7KqHMORlsdF/eA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.8.2/angular-sanitize.min.js"
+    integrity="sha512-JkCv2gG5E746DSy2JQlYUJUcw9mT0vyre2KxE2ZuDjNfqG90Bi7GhcHUjLQ2VIAF1QVsY5JMwA1+bjjU5Omabw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <!-- <link rel="shortcut icon" href=""> -->
+  <!-- using fontAwesome -->
+  <script src="http://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+  <!-- Bootstrap4 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <!-- ng-Toast -->
+  <script src="/js/ngToast.min.js"></script>
+  <link rel="stylesheet" href="/css/ngToast.min.css">
+
+   <!-- Sweet Alert -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@5.0.2/bootstrap-4/bootstrap-4.css">
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+</head>
+
+<body ng-app="shopping-cart-app" ng-controller="shopping-cart-ctrl">
+  <nav th:replace="site/layout/_menu.html"></nav>
+
+  <div class="search-bar" th:replace="site/layout/_search.html">
+
+  </div>
+  <div class="form" th:replace="site/layout/_form.html"></div>
+
+  <div th:replace="${main}"></div>
+
+  <footer th:replace="site/layout/_footer.html"></footer>
+
+  <!-- Toast Html -->
+  <toast></toast>
+
+  <script type="text/javascript">
+    // For Search bar
+    $(document).on('click', '.search', function () {
+      $('.search-bar').addClass('search-bar-active')
+    });
+    $(document).on('click', '.search-cancel', function () {
+      $('.search-bar').removeClass('search-bar-active')
+    });
+
+    // --Login-sign-up-form
+    $(document).on('click', '.user,.already-account', function () {
+      $('.form').addClass('login-active').removeClass('sign-up-active')
+    });
+    $(document).on('click', '.sign-up-btn', function () {
+      $('.form').addClass('sign-up-active').removeClass("login-active")
+    });
+
+
+    $(document).on('click', '.form-cancel', function () {
+      $('.form').removeClass('login-active').removeClass("sign-up-active")
+    });
+
+    // ----Full-slider-script
+    $(document).ready(function () {
+      $('#adaptive').lightSlider({
+        adaptiveHeight: true,
+        auto: true,
+        item: 1,
+        slideMargin: 0,
+        loop: true
+      });
+    });
+
+
+    // Feature-slider-------------
+    $(document).ready(function () {
+      $('#autoWidth').lightSlider({
+        autoWidth: true,
+        loop: true,
+        onSliderLoad: function () {
+          $('#autoWidth').removeClass('cS-hidden');
+        }
+      });
+    });
+
+
+    // // for-fix-menu-when-scroll
+    $(window).scroll(function () {
+      if ($(document).scrollTop() > 50) {
+        $('.navigation').addClass('fix-nav');
+      }
+      else {
+        $('.navigation').removeClass('fix-nav');
+      }
+    });
+
+    // for-responsive-menu
+    $(document).ready(function () {
+      $('.toggle').click(function () {
+        $('.toggle').toggleClass('active')
+        $('.navigation').toggleClass('active')
+      })
+    })
+  </script>
+  <script src="/js/shopping-cart-app.js"></script>
+  <!-- <script src="/js/profile-ctrl.js"></script> -->
+  <!-- Bootstrap js -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

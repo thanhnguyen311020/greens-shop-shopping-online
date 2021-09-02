@@ -1,0 +1,149 @@
+<div class="form_editor">
+  <form method="post" name="productForm" enctype="multipart/form-data" novalidate>
+    <div class="card">
+      <!-- <div class="card-header">
+         <h5 th:text="${product.isEdit == true ?'Cập Nhập Sảm Phẩm':'Thêm Mới Sản Phẩm'}"></h5>
+                    <span th:if="@{message} != null">[[${message}]]</span> 
+      </div> -->
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="productId">Mã Sản Phẩm</label>
+              <input type="text" ng-model="form.id" id="productId" class="form-control" placeholder="orderId" readonly
+                aria-describedby="helpId">
+
+            </div>
+
+            <div class="form-group">
+              <label for="form.name">Tên Sản Phẩm</label>
+              <input ng-model="form.name" type="text" class="form-control" id="name" name="name" aria-describedby="namehelp"
+                placeholder="Tên sản phẩm" required>
+              
+                    <small class="error" ng-show="productForm.name.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Không được để trống tên sản phẩm</small>
+            
+            </div>
+
+            <div class="form-group">
+              <label for="quantity">Ngày Nhập:</label>
+              <input ng-model="form.createDate" type="date" id="createDate" name="createDate" class="form-control" placeholder=""
+                aria-describedby="quantityHelp" required>
+               
+                  <small class="error" ng-show="productForm.createDate.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng nhập ngày</small>
+              
+            </div>
+
+            <div class="input-group mb-5 ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Giá Bán</span>
+              </div>
+              <input ng-model="form.price" type="number" step="any" class="form-control" placeholder=""
+                aria-label="Username" aria-describedby="basic-addon1" name="price" id="price" ng-min="1" required>
+              <div class="input-group-append">
+                <span class="input-group-text">.VND</span>
+              </div>
+          
+                <small class="error" ng-show="productForm.price.$error.min"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Giá phải lớn hơn 0</small>
+                <small class="error" ng-show="productForm.price.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Không được để trống giá sản phẩm</small>
+           
+            </div>
+            <div class="input-group mb-5 ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Khuyến mãi</span>
+              </div>
+              <input ng-model="form.discount" type="number" step="any" class="form-control" placeholder="" value="2"
+                aria-label="Username" aria-describedby="basic-addon1" name="discount" id="discount" ng-min="0" required>
+              <div class="input-group-append">
+                <span class="input-group-text">.%</span>
+              </div>
+              
+                <small class="error" ng-show="productForm.discount.$error.min"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Khuyến mãi phải lớn hơn 0</small>
+                <small class="error" ng-show="productForm.discount.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Không được để trống giá sản phẩm</small>
+  
+            </div>
+
+      
+
+          </div>
+          <div class="col-6">
+            <!-- <script>
+              function chooseFile(fileInput){
+                if(fileInput.files && fileInput.files[0]){
+                  var reader = new FileReader();
+
+                  reader.onload = function(e){
+                    $('#image').attr('src' , e.target.result);
+                  }
+                  reader.readAsDataURL(fileInput.files[0]);
+                }
+              }
+            </script> -->
+            <label for="image">
+              <img class="img-fluid" width="100%" ng-src="/images/{{form.image}} " src="/images/noImage.jpg" style="max-width: 300px; max-height: 200px; margin: auto;" >
+            
+            </label>
+            <div class="form-group">
+             
+              <label for="">Hình Ảnh:</label>
+              <input type="file"  id="image" onchange="angular.element(this).scope().imageChanged(this.files)"
+                class="form-control"  >
+              <small id="imageHelp" class="form-text text-muted">Help text</small>
+              <!-- //	<input type="hidden" name="imageFile" th:value="${product.image}"> -->
+            </div>
+
+
+            <div class="form-group">
+              <label for="status"> Kiểu</label>
+              <select class="form-control" ng-model="form.category.id" id="category" name="categories" required>
+                <option value="" selected>Loại sản phẩm</option>
+                <option ng-repeat="c in cates" ng-value="c.id">{{c.name}}</option>
+
+
+              </select>
+           
+                <small class="error" ng-show="productForm.categories.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn loại sản phẩm</small>
+           
+            </div>
+
+            <div class="form-group">
+              <label for="">Trạng thái</label> <br>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input ng-model="form.available" ng-value="true" class="form-check-input" type="radio" name="available" required
+                     value="checkedValue"> Enable
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                  <input ng-model="form.available" ng-value="false" class="form-check-input" type="radio" name="available" required
+                     value="checkedValue"> Disable
+                </label>
+              </div>
+
+            
+                <small class="error" ng-show="productForm.available.$error.required"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vui lòng chọn trạng thái hiển thị</small>
+   
+            </div>
+
+          </div>
+
+          <div class="col-12">
+            <div class="form-group">
+              <label for="">Mô Tả</label>
+              <textarea class="form-control"  rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted ">
+        <div style="float: right;">
+          <button class="btn " ng-show="!isShow"  ng-click="create()" ng-disabled="productForm.$invalid" type="button">Thêm Mới</button>
+          <button class="btn " ng-show="isShow"ng-click="update()" ng-disabled="productForm.$invalid" type="button">Cập Nhập</button>
+          <button class="btn " ng-show="isShow" ng-click="delete(form)" type="button">Xóa</button>
+          <button class="btn " ng-click="reset()"type="button">Làm Mới</button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

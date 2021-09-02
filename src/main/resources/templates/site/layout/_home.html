@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+
+<head>
+</head>
+
+<body>
+    <main>
+        <!-- Full-slide--------------------------------------->
+        <ul id="adaptive" class="cs-hidden">
+            <!-- box-1 -->
+            <li class="item-a">
+                <!-- box----- -->
+                <div class="full-slider-box f-slider-1">
+                    <!-- slider-text-container -->
+                    <div class="slider-text-container">
+
+                        <div class="f-slider-text">
+                            <span>Limitied offer</span>
+                            <strong>Giảm giá 30%  <br>với <font> mã khuyến mãi</font></strong>
+                            <a href="#" class="f-slider-btn">[[#{home.btnBanner}]]</a>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- box-2 -->
+            <li class="item-a">
+                <!-- box----- -->
+                <div class="full-slider-box f-slider-2">
+                    <!-- slider-text-container -->
+                    <div class="slider-text-container">
+
+                        <div class="f-slider-text">
+                            <span>Limitied offer</span>
+                            <strong>Giảm giá 30%  <br>với <font> mã khuyến mãi</font></strong>
+                            <a href="#" class="f-slider-btn">[[#{home.btnBanner}]]</a>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+
+            <!-- box-3 -->
+            <li class="item-a">
+                <!-- box----- -->
+                <div class="full-slider-box f-slider-3">
+                    <!-- slider-text-container -->
+                    <div class="slider-text-container">
+
+                        <div class="f-slider-text">
+                            <span>Limitied offer</span>
+                            <strong>Giảm giá 30%  <br>với <font> mã khuyến mãi</font></strong>
+                            <a href="#" class="f-slider-btn">[[#{home.btnBanner}]]</a>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!-- Featured-Categories -->
+        <div class="feature-heading">
+            <h2>[[#{home.categories}]]</h2>
+
+        </div>
+
+        <!-- Category-slider -->
+        <ul id="autoWidth" class="cs-hidden">
+            <!-- box-1 -->
+            <li class="item" th:each="item: ${categories}">
+                <!-- Feature-box -->
+                <div class="feature-box">
+                    <a
+                        th:href="@{|/greens/product/page/1?sortField=name&sortDir=${reverseSortDir}&keyword=${item.name}|}">
+                        <img th:src="@{|/images/${item.image}|}" alt="">
+                    </a>
+                </div>
+                <!-- text------ -->
+                <span>[[${item.name}]]</span>
+            </li>
+
+
+        </ul>
+
+        <section class="new-arrival">
+            <!-- heading -->
+            <div class="arrival-heading">
+                <strong>[[#{home.newProduct}]]</strong>
+                <p>We Provide You New Disgn Fashion Clother</p>
+            </div>
+            <!-- Product-container -->
+            <div class="product-container">
+                <!-- product-box-1 -->
+                <div class="product-box" th:each="item : ${newProduct}">
+
+                    <!-- img -->
+                    <div class="product-img">
+                        <!-- add-to-cart -->
+                        <a th:if="${item.quantity >0}" th:attr="ng-click= @{|cart.add(${item.id})|}" class="add-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <!-- <a  class="discount">
+								<span>12%</span>
+							</a> -->
+
+                        <img th:src="@{|/images/${item.image}|}" alt="">
+                        <div th:if="${item.quantity ==0}" class="soldOut">
+                            <img src="/images/icon_hethang.png" alt="">
+                        </div>
+                    </div>
+
+                    <!-- details -->
+                    <div class="product-details">
+                        <a th:href="@{|/greens/product/detail/${item.id}|}" class="p-name">[[${item.name}]]</a>
+                        <span class="p-price">[[${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}]].đ</span>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </section>
+
+        <section class="sale">
+            <!-- Sale-box-1------------- -->
+            <div class="sale-box">
+                <!-- img -->
+                <img src="/images/sale-fruits.jpg" alt="">
+                <!-- text---- -->
+                <a href="#">
+                    <div class="sale-text">
+                        <strong>Bag With Rose Pattern</strong>
+                        <span>Sale off 25%</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Sale-box-2------------- -->
+            <div class="sale-box">
+                <!-- img -->
+                <img src="/images/sale-seafood1.jpg" alt="">
+                <!-- text---- -->
+                <a href="#">
+                    <div class="sale-text">
+                        <strong>Bag With Rose Pattern</strong>
+                        <span>Sale off 25%</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Sale-box-3------------- -->
+            <div class="sale-box">
+                <!-- img -->
+                <img src="/images/sale-meat.jpg" alt="">
+                <!-- text---- -->
+                <a href="#">
+                    <div style="color: #ffffff;" class="sale-text">
+                        <strong>Bag With Rose Pattern</strong>
+                        <span>Sale off 25%</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+
+        <section class="new-arrival">
+            <!-- heading -->
+            <div class="arrival-heading">
+                <strong>[[#{home.featureItems}]]</strong>
+                <p>We Provide You New Disgn Fashion Clother</p>
+            </div>
+            <!-- Product-container -->
+            <div class="product-container">
+                <!-- product-box-1 -->
+                <div class="product-box" th:each="item : ${featuredProduct}">
+
+                    <!-- img -->
+                    <!-- img -->
+                    <div class="product-img">
+                        <!-- add-to-cart -->
+                        <a th:if="${item.quantity >0}" th:attr="ng-click= @{|cart.add(${item.id})|}" class="add-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <!-- <a  class="discount">
+								<span>12%</span>
+							</a> -->
+
+                        <img th:src="@{|/images/${item.image}|}" alt="">
+                        <div th:if="${item.quantity ==0}" class="soldOut">
+                            <img src="/images/icon_hethang.png" alt="">
+                        </div>
+                    </div>
+
+                    <!-- details -->
+                    <div class="product-details">
+                        <a th:href="@{|/greens/product/detail/${item.id}|}" class="p-name">[[${item.name}]]</a>
+                        <span class="p-price">[[${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}]].đ</span>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- Banner -->
+
+        <!-- box----- -->
+        <div class="banner-box f-slider-3">
+            <!-- slider-text-container -->
+            <div class="banner-text-container">
+
+                <div class="banner-text">
+                    <span>Limitied offer</span>
+                    <strong>30% off <br>with <font> promo code</font></strong>
+                    <a href="#" class="banner-btn">[[#{home.btnBanner}]]</a>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- Service------------- -->
+        <section class="services">
+            <!-- Services box 1-------- -->
+            <div class="services-box">
+                <i class="fas fa-shipping-fast"> </i>
+                <span>Free Shipping</span>
+                <p>Free Shipping For al Us Order</p>
+
+            </div>
+
+            <!-- Services box 2-------- -->
+            <div class="services-box">
+                <i class="fas fa-headphones-alt"></i>
+                <span>Support 24/7</span>
+                <p>We Support 24h a day</p>
+
+            </div>
+
+            <!-- Services box 3-------- -->
+            <div class="services-box">
+                <i class="fas fa-sync"> </i>
+                <span>100% Money Back</span>
+                <p>You have 30 days to Return</p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+</body>
+
+</html>

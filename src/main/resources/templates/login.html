@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Greens Smart | Login</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/styleLogin.css}">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<!-- <img class="wave" th:src="@{images/wave.png}"> -->
+	<div class="container">
+		<div class="img">
+			<img th:src="@{/images/mobileLogin.svg}">
+		</div>
+		<div class="login-content">
+           
+			<form th:action="@{/greens/security/login}" method="POST">
+				<img th:src="@{/images/avata.svg}">
+				<h2 class="title">Greens Mart</h2>
+                <small>[[${message}]]</small>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>[[#{login.username}]]</h5>
+           		   		<input type="text" name="username" class="input"  >
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>[[#{login.pass}]]</h5>
+           		    	<input type="password" name="password" class="input" >
+            	   </div>
+            	</div>
+                <div class=" remb">
+                    <input type="checkbox" name="remember-me"  >
+						 <h5>Remember me</h5>
+                    
+              </div>
+            	<a th:href="@{/greens/forgotPassword}">[[#{login.forgotPass}]]</a>
+            	<input type="submit" class="btn" th:value="#{btn.login}">
+				<a style="color: rgb(153, 60, 60);" th:href="@{/greens/register}">[[#{login.register}]]</a>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</body>
+</html>

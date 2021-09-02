@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <main th:object="${order}">
+
+
+
+        <!-- Cart Items details -->
+        <div class="small_container cart-page">
+            <div class="title_page">
+                <p>
+                    <a href="">ĐƠN HÀNG CỦA BẠN</a> >
+                    <a style="color:#555" href="">CHI TIẾT ĐƠN HÀNG</a>
+                </p>
+            </div>
+            <div class="info-order">
+                <div class="info">
+                    <div>
+                        <span>Họ và Tên</span>
+                        <input type="text" th:field="*{account.fullname}"   style="width: 100%;">
+                      
+                    </div>
+                    <div>
+                        <span>Ngày Mua</span>
+                        <input type="text" th:field="*{createDate}"  style="width: 100%;" readonly name="name" id="name">
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                </div>
+                <div class="info">
+                    <div>
+                        <span>Số Điện Thoại</span>
+                        <input type="text" style="width: 100%;" th:field="*{phone}" name="phone" id="phpne">
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                    <div>
+                        <span>Tổng Tiền:</span>
+                        <input style="width: 100%;" th:field="*{amount}"
+                             readonly
+                            type="text">
+                    </div>
+                </div>
+                <div>
+                    <span>Địa Chỉ:</span>
+                    <textarea style="width: 100%; height: 100px;" th:field="*{address}" name="address" id="address" cols="10" rows="30"></textarea>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th>No.</th>
+                    <th></th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Giá Bán</th>
+                    <th>Số Lượng</th>
+                    <th>Thành Tiền</th>
+                    <th></th>
+
+                </tr>
+
+                <tr  th:each="item : *{orderDetails}" th:object="${item}">
+                    <td>[[*{product.id}]]</td>
+                    <td><img th:src="@{|/images/${item.product.image}|}" alt=""></td>
+                    <td>[[*{product.name}]]</td>
+                    <td>[[*{product.price}]].đ</td>
+                    <td>[[*{quantity}]]</td>
+                    <td>[[${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}]].đ</td>
+                   
+                    <td></td>
+                   
+                </tr>
+
+
+            </table>
+
+
+            
+        </div>
+
+
+        <!-- <div class="modal fade" id="deleteCategory" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form th:action="@{/Poly-Shop/deleteModalDetails}" method="GET">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa đơn</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h6>Bạn có muốn sản phẩm?</h6>
+						<!-- <p>This action cannot be undone</p> >
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" class="btn btn-danger">Đồng Ý</button>
+
+            <input type="hidden" id="id" name="id">
+        </div>
+
+        </form>
+        </div>
+        </div>
+        </div> -->
+        
+
+
+
+    </main>
+
+</body>
+
+</html>

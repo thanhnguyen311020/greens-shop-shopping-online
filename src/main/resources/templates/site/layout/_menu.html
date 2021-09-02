@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav>
+    <!-- social-link-and-phone-number -->
+    <div class="social-call">
+      <!-- socail-links -->
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <!-- phone-email -->
+      <div class="phone">
+        <span>Call +12357689 </span>
+      </div>
+      <div class="lang">
+        <a href="?lang=vi">Vi</a>
+        <a href="?lang=en">USA</a>
+      </div>
+    </div>
+
+    <!-- Menu-bar -->
+    <div class="navigation">
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <img src="/images/logo.png" alt="">
+      </a>
+      <!-- menu-icon---------- -->
+      <div class="toggle">
+
+      </div>
+      <!-- menu -->
+      <ul class="menu">
+        <li><a href="/greens/home" th:utext="#{nav.home}"></a></li>
+        <li><a href="/greens/product" th:text="#{nav.product}">Product</a>
+
+          <!-- sale-label -->
+          <span class="sale-lable">Sale</span>
+        </li>
+        <li><a href="/greens/product" th:text="#{nav.about}">AboutUs</a></li>
+        <li><a href="/greens/product" th:text="#{nav.contact}">Contact</a></li>
+        <th:block th:if="${#request.remoteUser}">
+          <li th:if="${#request.isUserInRole('DRIE') or #request.isUserInRole('STAF')}"><a
+              th:href="@{/greens/admin#!/dashboard}">Administration</a></li>
+          
+        </th:block>
+      </ul>
+      <!-- right menu -->
+      <div class="right-menu">
+
+        <ul>
+          <li>
+            <!-- search -->
+            <a href="javascript:void(0);" class="search">
+              <i class="fas fa-search"></i>
+            </a>
+          </li>
+
+          <li>
+            <!-- user -->
+            <a th:href="@{/greens/security/login/form}">
+              <span style="font-size: 1rem;" th:if="${#request.remoteUser}">[[${#request.userPrincipal.name}]]</span>
+              <i class="far fa-user">
+
+              </i>
+
+
+            </a>
+
+            <ul th:if="${#request.remoteUser}" class="drop_menu">
+              <li><a th:href="@{|/greens/profile/${#request.remoteUser}|}" th:text="#{nav.profile}">Profile</a></li>
+              <li><a th:href="@{|/greens/order/${#request.remoteUser}|}" th:text="#{nav.order}">Order</a></li>
+
+              <li><a th:href="@{/greens/changePass}" th:text="#{nav.changePassword}">Change Password</a></li>
+              <li><a th:href="@{/greens/security/logout}" th:text="#{nav.logout}">Logoff</a></li>
+            </ul>
+          </li>
+
+          <li>
+
+            <!-- cart-icon -->
+            <a href="/greens/cart/view">
+              <i class="fas fa-shopping-cart">
+                <!-- Number-of-product-in-cart -->
+                <span class="number-cart-product">{{cart.count}}</span>
+              </i>
+            </a>
+          </li>
+        </ul>
+
+
+      </div>
+    </div>
+  </nav>
+</body>
+
+</html>

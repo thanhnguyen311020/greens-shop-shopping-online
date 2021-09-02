@@ -1,0 +1,1 @@
+app.controller("demo-ctrl", function ($scope, $http) {});

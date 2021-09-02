@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <main >
+
+
+        <!-- Single product details  -->
+        <div class="small_container single-product">
+            <div class="_row" th:object="${account}">
+                <div class="col_12" >
+                    <img th:if="${account.photo !=null}" th:src="@{|/images/${account.photo}|}" width="250px" height="250px"  alt="">
+                    <img th:if="${account.photo ==null}" src="/images/buy-1.jpg"  alt="">
+                </div>
+                <div class="col_2 _profile">
+                    <div>
+                        <span>Tài Khoảng</span>
+                        <input type="text" readonly id="username" th:field="*{username}" style="width: 100%;">
+
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                   
+                    <div>
+                        <span>Email</span>
+                        <input type="text" readonly  th:field="*{email}" style="width: 100%;">
+
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+
+                    <div>
+                        
+                        <input type="button"  data-toggle="modal" data-target="#exampleModal" readonly value="Chỉnh Sửa" class="btn_edit" >
+
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                </div>
+                <div class="col_2 _profile">
+                    <div>
+                        <span>Họ Và Tên</span>
+                        <input type="text" readonly  th:field="*{fullname}" style="width: 100%;">
+
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                    <div>
+                        <span>Số Điện Thoại</span>
+                        <input type="text" readonly  th:field="*{phone}" style="width: 100%;">
+
+                        <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+
+        <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div  class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Cập Nhập Thông Tin</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="productId">Mã Khách Hàng</label>
+                        <input type="text" readonly ng-model="form.username" id="productId" class="form-control"
+                            placeholder="orderId" aria-describedby="helpId">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="form.name">Tên Khách Hàng</label>
+                        <input type="text"  ng-model="form.fullname" class="form-control" id="name"
+                            aria-describedby="namehelp" placeholder="Name...">
+                        <small>Vui lòng nhập tên sản phẩm</small>
+                    </div>
+
+              
+
+                    <div class="form-group">
+                        <label for="email">Emai;</label>
+                        <input type="email" class="form-control" ng-model="form.email" name="email" id="email"
+                            aria-describedby="emailHelp" placeholder="Email">
+                        <small id="emailHelp" class="form-text text-muted">Vui lòng nhập email</small>
+                    </div>
+
+
+
+                </div>
+                <div class="col-6">
+                    <div class="form-group" style="width: 150px; height: 250px; margin: auto;">
+                        <label for="image">
+                        <img class="img-fluid" width="100%"  ng-src="/images/{{form.photo}}">
+                    </label>
+                    </div>
+                    <div class="form-group">
+
+                        <label for="">Hình Ảnh:</label>
+                        <input type="file" id="image"
+                            onchange="angular.element(this).scope().imageChanged(this.files)" class="form-control">
+                        <small id="imageHelp" class="form-text text-muted">Help text</small>
+                        <!-- //	<input type="hidden" name="imageFile" th:value="${product.image}"> -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Điện Thoại</label>
+                        <input type="text" class="form-control" ng-model="form.phone" name="phone" id="phone"
+                            aria-describedby="phoneHelp" placeholder="Điện Thoại">
+                        <small id="phoneHelp" class="form-text text-muted">Help text</small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ng-click="update()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+        <!-- Title -->
+        <!-- <div class="small-container">
+            <div class="row row-2">
+                <h2>Related Product</h2>
+                <p>View more</p>
+            </div>
+        </div> -->
+
+        <!-- Products -->
+   <!-- Category-slider -->
+   <ul id="autoWidth" class="cs-hidden">
+    <!-- box-1 -->
+    <li class="item" th:each="item: ${categories}">
+        <!-- Feature-box -->
+        <div class="feature-box">
+            <a href="#">
+                <img th:src="@{|/images/${item.image}|}" alt="">
+            </a>
+        </div>
+        <!-- text------ -->
+        <span>[[${item.name}]]</span>
+    </li>
+    
+
+</ul>
+
+
+    </main>
+
+</body>
+
+</html>

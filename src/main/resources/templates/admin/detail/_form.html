@@ -1,0 +1,77 @@
+<div class="form_editor">
+  <form method="post" enctype="multipart/form-data">
+    <div class="card">
+      <!-- <div class="card-header">
+           <h5 th:text="${product.isEdit == true ?'Cập Nhập Sảm Phẩm':'Thêm Mới Sản Phẩm'}"></h5>
+                      <span th:if="@{message} != null">[[${message}]]</span> 
+        </div> -->
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="productId">Mã Chi Tiết</label>
+              <input type="text" ng-model="form.id" id="productId" class="form-control" placeholder="orderId" readonly
+                aria-describedby="helpId">
+
+            </div>
+
+            <div class="form-group">
+              <label for="form.name">Mã Sản Phẩm {{form.product.name}}{{form.order.id}}</label>
+              <input ng-model="form.product.id" type="text" class="form-control" id="name" aria-describedby="namehelp"
+                placeholder="Name...">
+                <input type="hidden"  ng-value="form.order.id = id"  >
+              <small>Vui lòng nhập mã sản phẩm</small>
+            </div>
+
+            
+            <div class="input-group mb-5 ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Giá Bán</span>
+              </div>
+              <input  ng-model="form.price" type="number" min="0" step="any" class="form-control" placeholder=""
+                aria-label="Username" aria-describedby="basic-addon1">
+              <div class="input-group-append">
+                <span class="input-group-text">.VND</span>
+              </div>
+              <small>Dữ liệu phải là số và lớn hơn 0</small>
+            </div>
+
+
+
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="quantity">Số Lượng</label>
+              <input  ng-model="form.quantity" type="number" min="0" id="quantity" class="form-control" placeholder=""
+                aria-describedby="quantityHelp">
+              <small>Dữ liệu phải là số và lớn hơn 0</small>
+            </div>
+
+
+
+            <div class="input-group mb-5 ">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"> Thành Tiền</span>
+              </div>
+              <input  ng-value="form.price*form.quantity" min="0" type="number" step="any" class="form-control" placeholder=""
+                aria-label="Username" aria-describedby="basic-addon1">
+              <div class="input-group-append">
+                <span class="input-group-text">.VND</span>
+              </div>
+              <small>Dữ liệu phải là số và lớn hơn 0</small>
+            </div>
+          </div>
+          </div>
+          <div class="card-footer text-muted ">
+            <div style="float: right;">
+              <button class="btn " ng-click="create()" type="button">Lưu</button>
+              <button class="btn " ng-click="update()" type="button">Cập Nhập</button>
+              <button class="btn " ng-click="delete(form)" type="button">Xoa</button>
+              <button class="btn " ng-click="reset()" type="button">New</button>
+              <a class="btn btn-outline-info">Danh Sách Sản Phẩm</a>
+            </div>
+          </div>
+        </div>
+
+  </form>
+</div>

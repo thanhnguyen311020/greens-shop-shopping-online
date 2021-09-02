@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <main>
+
+
+        <!-- Single product details  -->
+        <div class="small_container single-product">
+            <div class="_row">
+                <div class="col_2">
+                    <img th:src="@{|/images/${product.image}|}" width="100%" id="product-img">
+                    <div th:if="${product.quantity ==0}" class="soldOutDetails">
+                        <img src="/images/icon_hethang.png" alt="">
+                    </div>
+                    <div class="small-img-row">
+                        <div class="small-img-col">
+                            <img th:src="@{|/images/${product.image}|}" class="small-img">
+                            
+                        </div>
+                        
+                        <!-- <div class="small-img-col">
+                            <img src="/images/gallery-2.jpg" class="small-img">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="/images/gallery-3.jpg" class="small-img">
+                        </div>
+                        <div class="small-img-col">
+                            <img src="/images/gallery-4.jpg" class="small-img">
+                        </div> -->
+
+                    </div>
+                </div>
+                <div class="col_2">
+                    <p>[[#{nav.home}]] / [[#{nav.product}]] / [[${product.category.name}]]</p>
+                    <h1>[[${product.name}]]</h1>
+                    <h4>[[${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}]]đ</h4>
+                    <!-- <select name="" id="">
+                        <option value="">Selelct Size</option>
+                        <option value="">XXL</option>
+                        <option value="">XL</option>
+                        <option value="">Large</option>
+                        <option value="">Medium</option>
+                        <option value="">Small</option>
+                    </select> -->
+                    <input type="number" min="1" value="1">
+                    <a th:if="${product.quantity >0}"  th:attr="ng-click= @{|cart.add(${product.id})|}" class="btn_banner" >[[#{home.btnAddToCart}]]</a>
+                    <a th:unless="${product.quantity >0}" style="background-color: grey;"  class="btn_banner" >[[#{home.btnAddToCart}]]</a>
+                
+                    <h3>Thông Tin <i class="fa fa-indent"></i></h3>
+                  
+                    <p>Give your summer wardrobe a style upgeade with the HRX Men's Active T-shirt. Team it with a pair
+                        of
+                        shorts for yout morning workout or a denims for an evening out with the guys.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <!-- <div class="small-container">
+            <div class="row row-2">
+                <h2>Related Product</h2>
+                <p>View more</p>
+            </div>
+        </div> -->
+
+        <!-- Products -->
+        <section class="new-arrival">
+            <!-- heading -->
+            <div class="arrival-heading">
+                <strong>[[#{prod.similarProduct}]]</strong>
+                <!-- <p>We Provide You New Disgn Fashion Clother</p> -->
+            </div>
+            <!-- Product-container -->
+            <div class="product-container">
+                <!-- product-box-1 -->
+                <div class="product-box" th:each="item: ${productC}">
+
+                    <!-- img -->
+                    <div class="product-img">
+                        <!-- add-to-cart -->
+                        <a href="#" class="add-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+
+                        <img th:src="@{|/images/${item.image}|}" alt="">
+                    </div>
+
+                    <!-- details -->
+                    <div class="product-details">
+                        <a th:href="@{|/greens/product/detail/${item.id}|}" class="p-name">[[${item.name}]]</a>
+                        <span class="p-price">[[${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}]].đ</span>
+                    </div>
+
+                </div>
+
+               
+            </div>
+        </section>
+
+
+
+    </main>
+
+</body>
+
+</html>

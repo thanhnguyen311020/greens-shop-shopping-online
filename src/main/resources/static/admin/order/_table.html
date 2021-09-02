@@ -1,0 +1,272 @@
+<!-- table -->
+<table>
+    <div class="serch_form">
+        <div style="float: left;">
+           
+            <select name="keyname" ng-model="search.status" id="fillter">
+              <option selected value="">Tình trạng đơn hàng</option>
+              <option ng-value="1">Đang chờ xác nhận</option>
+              <option ng-value="2">Đã xác nhận</option>
+              <option ng-value="3">Đang giao hàng</option>
+              <option ng-value="4">Giao hàng thành công</option>
+              <option ng-value="0">Đã hủy</option>
+            </select>
+        </div>
+        <form>
+          <div style="float: right; margin-bottom: 10px;" class="form-inline">
+            <input type="text" name="keyname"
+                class="form-control" id="namec" ng-model="search" placeholder="Search..."></input>
+            <button class="btn ">Search</button>
+        </div>
+        </form>
+    </div>
+    <div>
+        <small></small>
+    </div>
+    <tr id="header">
+      <th ng-click="sort('id')"> No.
+        <i class="" ng-show="sortKey=='id'" ng-class="{'fa fa-sort-numeric-desc':reverse,'fa fa-sort-numeric-asc':!reverse}"></i>
+      </th>
+        <th ng-click="sort('createDate')"> Ngày Đặt
+          <i class="" ng-show="sortKey=='createDate'" ng-class="{'fa fa-sort-desc':reverse,'fa fa-sort-asc':!reverse}"></i>
+        </th>
+        <th ng-click="sort('account.fullname')"> Khách Hàng
+          <i class="" ng-show="sortKey=='account.fullname'" ng-class="{'fa fa-sort-alpha-asc':reverse,'fa fa-sort-alpha-desc':!reverse}"></i>
+        </th>
+        <th>SĐT</th>
+        <th ng-click="sort('amount')"> Tổng Tiền
+          <i class="" ng-show="sortKey=='amount'" ng-class="{'fa fa-sort-amount-asc':reverse,'fa fa-sort-amount-desc':!reverse}"></i>
+        </th>
+        <th ng-click="sort('status')"> Tình trạng đơn hàng
+          <i class="" ng-show="sortKey=='status'" ng-class="{'fa fa-sort-amount-asc':reverse,'fa fa-sort-amount-desc':!reverse}"></i>
+        </th>
+        <th></th>
+    </tr>
+    <tr dir-paginate="item in items|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+        <td>{{item.id}}</td>
+        <td>{{item.createDate | date:' HH:mm:ss dd-MM-yyyy '}}</td>
+        <td>{{item.account.fullname }}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.amount | number : 2}}</td>
+        <!-- <td ng-if="item.status == 1">Chờ xác nhận</td>
+        <td ng-if="item.status == 2">Đã xác nhận</td>
+        <td ng-if="item.status == 3">Đang giao hàng</td>
+        <td ng-if="item.status == 4">Giao Hàng Thành Công</td>
+        <td ng-if="item.status == 0">Đã Hủy</td> -->
+
+        <td style="color: orange; " ng-show="item.status==1">
+            <i class="fa fa-spinner" aria-hidden="true"></i>
+           Đang chờ xát nhận
+        </td>
+        <td style="color: blue;" ng-show="item.status==2">
+            <i class="fa fa-check-square-o" aria-hidden="true"></i> Đã xác nhận
+        </td>
+        <td style="color: green;" ng-show="item.status==3">
+            <i class="fa fa-truck" aria-hidden="true"></i> Đang giao hàng
+        </td>
+        <td style="color: green;" ng-show="item.status==4">
+            <i class="fa fa-check" aria-hidden="true"></i> Giao hàng thành công
+        </td>
+        <td style="color: red;" ng-if="item.status==0">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Đã hủy
+        </td>
+
+
+        <td>
+            <a ng-click="edit(item)"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> |
+            <a style="color: black;" title="Chi tiết" href="#!detail/{{item.id}}"><i class=" fa fa-eye fa-2x " aria-hidden="true"></i></a> |
+            <!-- <a href="#deleteCategory" data-toggle="modal" class="delete">
+                <i class="fa fa-trash-o" data-toggle="tooltip" aria-hidden="true"></i>
+            </a>
+            <input type="hidden" id="id" th:value="${item.productId}"> -->
+
+            <!-- <a ng-click="delete(item)">
+                <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+            </a> -->
+
+            <!-- <a ng-click="selectUser(item)" data-toggle="modal" data-target="#deleteItem">
+                <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+                </a> -->
+            <a ng-click="edit1(item)" data-toggle="modal" data-target="#editModal">
+                <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                </a>
+        </td>
+
+
+    </tr>
+
+
+</table>
+<nav style="display: flex; justify-content: center; margin-top: 20px; " aria-label="Page navigation example">
+
+  <dir-pagination-controls 
+    max-size="5"
+    direction-links="true"
+    boundary-links="true" >
+</dir-pagination-controls>
+   <!--  <ul  class="pagination">
+      <li class="page-item"><a class="page-link"  ng-click="pager.first()">Previous</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.prev()">Prev</a></li>
+      <li class="page-item"><a class="page-link"  >{{pager.page + 1}} of {{pager.count}}</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.next()">Next</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.last()">Last</a></li>
+    </ul>-->
+    <div style="margin-left: 20px;">
+      <label for="search">Xem:</label>
+          <select style="height: 40px;" ng-model="pageSize" ng-options="num for num in [5, 10, 15,20]" ></select>
+    </div>
+  </nav> 
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Xóa Loại hàng</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span>Bạn có muốn xóa <b>"{{message}}"</b></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="hidden" ng-value="clickedItem.id">
+          <button type="button" class="btn btn-danger"  data-dismiss="modal" ng-click="delete(clickedItem)">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thông Tin Đơn Hàng</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="card">
+                  <!-- <div class="card-header">
+                     <h5 th:text="${product.isEdit == true ?'Cập Nhập Sảm Phẩm':'Thêm Mới Sản Phẩm'}"></h5>
+                                <span th:if="@{message} != null">[[${message}]]</span> 
+                  </div> -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="productId">Mã Đơn</label>
+                          <input type="text" ng-model="form.id" id="productId" class="form-control" placeholder="orderId" readonly
+                            aria-describedby="helpId">
+            
+                        </div>
+            
+                        <div class="form-group">
+                          <label for="form.name">Tên Khách Hàng</label>
+                          <input ng-model="form.account.username" type="text" class="form-control" id="name" aria-describedby="namehelp"
+                            placeholder="Name...">
+                          <small>Vui lòng nhập tên sản phẩm</small>
+                        </div>
+                        <div class="input-group  ">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"  id="basic-addon1">Tổng Tiền</span>
+                          </div>
+                          <input ng-model="form.amount" type="number" step="any" readonly class="form-control" placeholder=""
+                            aria-label="Username" aria-describedby="basic-addon1">
+                          <div class="input-group-append">
+                            <span class="input-group-text">.VND</span>
+                          </div>
+                          <small>Dữ liệu phải là số và lớn hơn 0</small>
+                        </div>
+            
+            
+                      </div>
+                      <div class="col-6">
+                      
+                        
+                          <div class="form-group">
+                              <label for="quantity">Ngày Mua:</label>
+                              <input ng-value="form.createDate | date:' HH:mm:ss dd-MM-yyyy '" type="input" readonly id="quantity" class="form-control" placeholder=""
+                                aria-describedby="quantityHelp">
+                              
+                            </div>
+                
+                            
+                
+                            <div class="form-group">
+                              <label for="categoryId"> Tình Trạng</label>
+                              <select ng-disable="form.status == 4" ng-model="form.status" class="form-control" id="categoryId">
+                                <!-- <option>Selected</option> -->
+                                <option ng-value="1" ng-disabled="form.status >1"  >Chờ xác nhận</option>
+                                <option ng-value="2"  >Đã xác nhận</option>
+                                <option ng-value="3"  >Đang giao hàng</option>
+                                <option ng-value="4"  >Giao hàng thành công</option>
+                                <option ng-value="0"  >Đã Hủy</option>
+                                  
+                              </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Địa Chỉ</label>
+                                <textarea class="form-control" ng-model="form.address" ></textarea>
+                              </div>
+            
+                      </div>
+            
+                      
+                    </div>
+                  </div>
+                 
+                </div>
+            
+              </form>
+
+              <div class="ex1">
+                <table>
+                    
+                    <tr id="header">
+                        <th>No.</th>
+                        <th></th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Giá Bán</th>
+                        <th>Số Lượng</th>
+                        <th>Thành Tiền</th>
+                         
+                
+                    </tr>
+                
+                
+                
+                    <tr ng-repeat="item in details">
+                          <td>{{item.id}}</td>
+                        <td style="width: 100px">
+                            <img src="/images/{{item.product.image}}" width="100%"/>
+                        </td>
+                        <td >{{item.product.name}}</td>
+                        <td>{{item.product.price | number}}.VND</td>
+                        <td >{{item.quantity}}</td>
+                        <td >{{item.price | number}}.VND</td>
+                        
+                        
+                    
+                
+                    </tr>
+                
+                
+                </table>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-danger" ng-disabled="form.status==0 || form.status==4" ng-click="updateStatusOrder();">Cập Nhập trạn thái đơn hàng</button>
+        </div>
+      </div>
+    </div>
+  </div>

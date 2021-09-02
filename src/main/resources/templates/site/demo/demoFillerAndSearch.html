@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+	crossorigin="anonymous">
+
+<title>Hello, world!</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-10 m-auto">
+				<h2>Product Manage</h2>
+				<form th:action="@{/demoFilterAndSearch/page/1}">
+					<input type="hidden" name="sortField" th:value="${sortField}">
+					<input type="hidden" name="sortDir" th:value="${sortDir}">
+					<label for="exampleInputEmail1">Filter</label>
+					<div class="form-group-inline float-left">
+
+						<input type="text" class="form-control" required="required"
+							name="keyword" th:value="${keyword}" id="exampleInputEmail1"
+							aria-describedby="emailHelp">
+					</div>
+
+					<button type="submit" class="btn btn-primary ml-3">Submit</button>
+				</form>
+			</div>
+
+			<div class="col-10 m-auto">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col"><a
+								th:href="@{|/demoFilterAndSearch/page/${currentPage}?sortField=name&sortDir=${reverseSortDir}&${keyword != null ? 'keyword='+keyword : ''}|}">#</a>
+							</th>
+							<th scope="col">Name</th>
+							<th scope="col">Create Date</th>
+							<th scope="col">Price</th>
+							<th>Category</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item: ${products}">
+							<th scope="row">[[${item.id}]]</th>
+							<td>[[${item.name}]]</td>
+							<td>[[${item.createDate}]]</td>
+							<td>[[${item.price}]]</td>
+							<td>[[${item.category.name}]]</td>
+							<td><a href="#">Edit</a> | <a href="#">Del</a></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+			<div class="col-10 m-auto" style="display:flex; justify-content: center; width: 100%">
+				<nav aria-label="Page navigation example m-auto" th:if="${totalPages > 1}">
+				
+					<ul class="pagination">
+						<li class="page-item">
+							<span class="page-link">Total Items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]] </span>
+							
+						</li>
+						<li class="page-item">
+							<a class="page-link" th:if="${currentPage > 1}" th:href="@{|/demoFilterAndSearch/page/1?sortField=${sortField}&sortDir=${sortDir}|}">
+								First <!-- <span th:unless="${currentPage > 1}">First</span> -->
+							</a>
+						</li>
+					
+						<li class="page-item">
+							<a class="page-link" th:if="${currentPage > 1}" th:href="@{|/demoFilterAndSearch/page/${currentPage - 1}?sortField=${sortField}&sortDir=${sortDir}|}">
+								<!-- <span th:unless="${currentPage > 1}">Previous</span> -->Previous
+							</a>
+						</li>
+						<li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}">
+							<a class="page-link"  th:href="@{|/demoFilterAndSearch/page/${i}?sortField=${sortField}&sortDir=${sortDir}&${keyword != null ? 'keyword='+keyword : ''}|}">[[${i}]]</a>
+							<!-- <span th:unless="${i != currentPage}">[[${i}]]</span> -->
+						</li>
+					
+						<li class="page-item" th:if ="${currentPage < totalPages}">
+							<a class="page-link"  th:href="@{|/demoFilterAndSearch/page/${currentPage + 1}?sortField=${sortField}&sortDir=${sortDir}&${keyword != null ? 'keyword='+keyword : ''}|}">Next</a>
+						</li>
+						<li th:unless ="${currentPage < totalPages}" class="page-item">
+							<a class="page-link"  style=" pointer-events: none;">Next</a>
+						</li>
+						
+						<li class="page-item" th:if ="${currentPage < totalPages}">
+							<a class="page-link"  th:href="@{|/demoFilterAndSearch/page/${totalPages}?sortField=${sortField}&sortDir=${sortDir}|}">Last</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+		crossorigin="anonymous"></script>
+
+	<!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>

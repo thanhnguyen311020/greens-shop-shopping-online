@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <main>
+
+
+
+        <!-- Cart Items details -->
+        <div class="small_container cart-page">
+            <div class="title_page">
+                <p>
+                    <a style="color:#555" href="">ĐƠN HÀNG CỦA BẠN</a> >
+                    <a href="">CHI TIẾT ĐƠN HÀNG</a>
+                </p>
+            </div>
+            <table style="width: 100%; margin: auto;">
+                <tr>
+                    <th>Mã</th>
+                    <th>Người Đặt Hàng</th>
+                    <th>Điện thoại</th>
+                    <th>Ngày Đặt Hàng</th>
+                    <th>Tổng Tiền</th>
+                    <th>Trạng Thái Đơn Hàng</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}">
+
+                    </td>
+                    <td th:text="${order.account.fullname}">
+
+                    </td>
+                    <td>
+                        08574663
+                    </td>
+                    <td>[[${order.createDate}]]</td>
+                    <td>[[${#numbers.formatDecimal(order.amount, 0, 'COMMA', 0, 'POINT')}]].đ </td>
+
+                    <td style="color: orange; " th:if="${order.status==1}"><i class="fa fa-spinner"
+                            aria-hidden="true"></i> [[${order.status==1 ? 'Đang chờ xác nhận':''}]]</td>
+                    <td style="color: blue;" th:if="${order.status==2}"><i class="fa fa-check-square-o"
+                            aria-hidden="true"></i> Đã xác nhận</td>
+                    <td style="color: green;" th:if="${order.status==3}"><i class="fa fa-truck"
+                            aria-hidden="true"></i> Đang Giao Hàng</td>
+                    <td style="color: green;" th:if="${order.status==4}"><i class="fa fa-check"
+                            aria-hidden="true"></i> Giao Hàng Thành Công</td>
+                    <td style="color: red;" th:if="${order.status==0}"><i class="fa fa-exclamation-triangle"
+                            aria-hidden="true"></i> Đã Hủy</td>
+                    <!-- <td>Ok</td> -->
+                    <td>
+                        <a th:href="@{|/greens/order/detail/${order.id}|}" title="Xem Chi Tiết"><i
+                                style="color: #0b9d8a; font-size: 1.5rem; font-family: 400;" class="fa fa-info-circle fa-2x" aria-hidden="true"> </i></a>
+                        <!-- <a th:if="${order.status ==0}" title="Xóa Đơn Hàng" th:href="@{'/Poly-Shop/delete_order/' + ${order.orderId}}"><i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                    </a>  -->
+
+                    </td>
+                    <td> <a th:href="@{|/greens/order/cancelOrder/${order.id}|}" style="color: red;" th:if="${order.status ==1}" title="Hủy Đơn Hàng"><i  style=" font-size: 1.5rem; font-family: 400;" class="fa fa-ban fa-2x"
+                                aria-hidden="true"></i></a>
+                            <a style="color: grey;" th:if="${order.status !=1}" title="Hủy Đơn Hàng"><i  style=" font-size: 1.5rem; font-family: 400;" class="fa fa-ban fa-2x"
+                                    aria-hidden="true"></i>
+                            </a> </td>
+                </tr>
+
+            </table>
+
+
+
+            <div>
+                <a class="btn_back" th:href="@{/Poly-Shop/products}">Tiếp tục mua sắm</a>
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+</body>
+
+</html>

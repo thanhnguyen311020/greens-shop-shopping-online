@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <main>
+
+
+        <!-- Single product details  -->
+        <div class="small_container single-product">
+            <div class="_row" >
+                <div class="col_12">
+                    <h2>Đổi Mặt Khẩu </h2>
+                </div>
+                <div class="col_12 changePass">
+                   
+                    <form th:action="@{/greens/changePass}" method="POST">
+                        <input type="hidden" name="token" >
+                        <p>We will be sending the reset password  link to yout email</p>
+                        <p>[[${error}]]</p>
+                        <p>[[${message}]]</p>
+                        <div style="margin-top: 20px;">
+                            <span>Mật Khẩu Cũ</span>
+                            <input type="password" name="oldPassword" id="  " required    style="width: 100%;">
+
+                            <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <span>Mật Khẩu Mới</span>
+                            <input type="password" name="password" id="password" required    style="width: 100%;">
+
+                            <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <span>Nhập Lại Mật Khẩu</span>
+                            <input type="password" oninput="checkPasswordMatch(this);" name="confirmPassword" id="confirmPassword"   style="width: 100%;">
+
+                            <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                        </div>
+                        
+                        <div class="mt-4">
+
+                            <input type="submit" 
+                                value="Change Pass" style="width: 100%;" >
+
+                            <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+            function checkPasswordMatch(fieldConfirmPassword){
+                if(fieldConfirmPassword.value != $("#password").val()){
+                    fieldConfirmPassword.setCustomValidity("Password do not match")
+                }else{
+                    fieldConfirmPassword.setCustomValidity("")
+                }
+            }
+        </script>
+    </main>
+
+</body>
+
+</html>

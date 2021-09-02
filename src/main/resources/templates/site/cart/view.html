@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<main>
+		
+  <!-- Cart Items details -->
+  <div class="small_container cart-page" >
+    <div class="title_page">
+    <p>
+        <a style="color:#555" href="">[[#{cart.cart}]]</a> >
+        <a href="">[[#{cart.checkOut}]]</a> > <a href="">[[#{cart.orderSuccess}]]</a></p>
+    </div>
+    <!-- <div th:if="${session.myCartItems.isEmpty()}" style="margin-top: 20px">
+        <span style="font-size:20px">
+        Giỏ Hàng trống
+    </span>
+    </div> -->
+    <table>
+        <tr>
+            <th>[[#{table.product}]]</th>
+            <th>[[#{table.quantity}]]</th>
+            <th>[[#{table.discount}]]</th>
+            <th>[[#{table.subtotal}]]</th>
+        </tr>
+
+        <tr ng-repeat="item in cart.items">
+            <td>
+                <div class="cart-info">
+                    <img src="/images/{{item.image}}">
+                    <div>
+                        <p>{{item.name}}</p>
+                        <small>Giá bán: {{item.price |  number }}.đ</small>
+                        <br>
+                        <a style="color: #f76b6a; padding: 0px; margin: 0px;" ng-click="cart.remove(item.id)">[[#{btn.remove}]] </a>
+                    </div>
+                </div>
+            </td>
+
+            <td><input ng-change="cart.saveToLocalStorage()" type="number" min="1" ng-model="item.qty"
+				 ng:value="item.qty" ></td>
+                 <td>{{item.discount == 0 ? 0:item.discount}}%</td>
+            <td style="font-weight: 500; font-size: 1rem;">{{item.qty * (item.price* ((100-item.discount)/100)) | number }}.đ</td>
+        </tr>
+       
+    </table>
+	<input type="hidden" ng-click="cart.clear()">
+    <div class="total-price" >
+        <table>
+            <tr>
+                <td>[[#{table.subtotal}]]</td>
+                <td>
+                <td style="font-weight: 500; font-size: 1.2rem;"> {{cart.amount|number : 0}}.đ</td>
+
+                </td>
+            </tr>
+            <tr>
+                <td>[[#{table.discount}]]</td>
+                <td colspan="2">
+                    {{cart.discounts|number}}.đ
+                </td>
+            </tr>
+
+            <tr style="font-size: 20px; font-weight: 600;">
+                <td>[[#{table.total}]]</td>
+                <td colspan="2" style="color: red;">{{cart.amount|number }}.đ
+                    </td>
+            </tr>
+            <tr style="text-align: center;">
+                <td colspan="3">
+                    <a style="width: 100%; text-align: center; color:#ffffff;" th:href="@{/greens/order/checkout}" class="btn_banner" >[[#{btn.checkOut}]]</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+     <div>
+    <a class="btn_back" href="/greens/product" >[[#{btn.continueShopping}]]</a>
+</div>
+    
+</div>
+
+	</main>
+	
+</body>
+</html>

@@ -1,0 +1,87 @@
+  <!-- table -->
+  <table >
+    <div class="serch_form">
+        <div>
+            <a class="btn float-left" >Thêm Mới Sản Phẩm</a>
+        </div>
+        <form >
+            <div style="float: right; margin-bottom: 10px;" class="form-inline">
+                <input type="text" name="name"
+                    class="form-control" id="namec" placeholder="Search..."></input>
+                <button class="btn ">Search</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <small></small>
+    </div>
+    <tr id="header">
+        <th>No.</th>
+        <th></th>
+        <th>Loai</th>      
+        <th></th>
+    </tr>
+    <tr ng-repeat="item in pager.items">
+        <td>{{item.id}}</td>
+        <td style="width: 100px">
+            <img src="/images/{{item.image}}" width="100%"/>
+        </td>
+        <td >{{item.name}}</td>
+       
+        
+        <td>
+            <a ng-click="edit(item)"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> |
+            <!-- <a href="#deleteCategory" data-toggle="modal" class="delete">
+                <i class="fa fa-trash-o" data-toggle="tooltip" aria-hidden="true"></i>
+            </a>
+            <input type="hidden" id="id" th:value="${item.productId}"> -->
+
+            <a ng-click="delete(item)">
+            <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+            </a>
+        <!-- ||
+        <a data-id="{{item.id}}" data-name="{{item.name}}" 
+						onclick="showConfirmModalDialog(this.getAttribute('data-id'),this.getAttribute('data-name'))">
+						<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+						</a>
+        </td> -->
+
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#deleteItem" ng-click="selectUser(item)">Del</button>
+    </tr>
+
+
+</table>
+<nav style="display: flex; justify-content: center; margin-top: 20px; " aria-label="Page navigation example">
+    <ul  class="pagination">
+      <li class="page-item"><a class="page-link"  ng-click="pager.first()">Previous</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.prev()">Prev</a></li>
+      <li class="page-item"><a class="page-link"  >{{pager.page + 1}} of {{pager.count}}</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.next()">Next</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.last()">Last</a></li>
+    </ul>
+  </nav>
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span>{{message}}</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="hidden" ng-value="clickedItem.id">
+          <button type="button" class="btn btn-primary"  data-dismiss="modal" ng-click="delete(clickedItem)">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>

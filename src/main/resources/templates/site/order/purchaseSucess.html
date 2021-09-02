@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<main>
+
+        
+
+    <div class="small_container single_product" style="margin-bottom: 30px; padding: 10px 25px;">
+        <div class="title_page">
+            <p>
+                <a href="">GIỎ HÀNG</a> >
+                <a  href="">THANH TOÁN</a> > <a style="color:#555" href="">ĐẶT HÀNG THÀNH CÔNG</a>
+            </p>
+        </div>
+    	<div>
+            <img th:src="@{/images/shipping.gif}" style="display: block; margin: auto;" alt="">
+
+            <div style="text-align: center;">
+                <h1>Đặt Hàng Thành Công</h1>
+                <span>{{link}} + ok</span>
+                <span>Đơn đang được xác nhận</span><br>
+                <span>Bạn có thể vào mục đơn hàng để kiểm tra tình trạng đơn hàng</span>
+            </div>
+        </div>
+
+    	<div>
+    		<a class="btn_back" href="/greens/product">Tiếp tục mua sắm</a>
+    		<a class="btn_back" th:href="@{|/greens/order/${#request.remoteUser}|}">Đơn Hàng</a>
+    	</div>
+    </div>
+
+	
+	</main>
+	
+</body>
+</html>

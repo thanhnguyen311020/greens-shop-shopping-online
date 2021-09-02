@@ -1,0 +1,108 @@
+  <!-- table -->
+  <table >
+    <div class="serch_form">
+        <div>
+            <a class="btn float-left" >Thêm Mới Sản Phẩm</a>
+        </div>
+        <form >
+          <div style="float: right; margin-bottom: 10px;" class="form-inline">
+            <input type="text" name="keyname"
+                class="form-control" id="namec" ng-model="search" placeholder="Search..."></input>
+            <button class="btn ">Search</button>
+        </div>
+        </form>
+    </div>
+    <div>
+        <small></small>
+    </div>
+    <tr id="header">
+        <th>No.</th>
+        <th></th>
+        <th>Tên</th>
+        <th>Ngày Tạo</th>
+        <th>Email</th>
+        <th>Điện Thoại</th>
+        
+        
+        <th></th>
+
+
+    </tr>
+
+    
+
+    <tr  dir-paginate="item in items|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+        <td>{{item.username}}</td>
+        <td style="width: 100px">
+            <img ng-show="{{item.photo!= null}}" src="/images/{{item.photo}}" width="100%" alt=""/>
+            <img ng-show="{{item.photo== null}}" height="50px" src="/images/noImage.jpg" width="100%"/>
+        </td>
+        <td >{{item.fullname}}</td>
+        <td >{{item.createDate | date : 'dd-MM-yyyy'}}</td>
+        <td >{{item.email}}</td>
+ 
+        <td >{{item.phone}}</td>
+        
+     
+        
+        <td>
+            <a ng-click="edit(item)"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a> |
+            <!-- <a href="#deleteCategory" data-toggle="modal" class="delete">
+                <i class="fa fa-trash-o" data-toggle="tooltip" aria-hidden="true"></i>
+            </a>
+            <input type="hidden" id="id" th:value="${item.productId}"> -->
+
+            <a ng-click="selectUser(item)" data-toggle="modal" data-target="#deleteItem">
+                <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+                </a>
+        </td>
+
+
+    </tr>
+
+
+</table>
+<nav style="display: flex; justify-content: center; margin-top: 20px; " aria-label="Page navigation example">
+
+  <dir-pagination-controls 
+    max-size="5"
+    direction-links="true"
+    boundary-links="true" >
+</dir-pagination-controls>
+   <!--  <ul  class="pagination">
+      <li class="page-item"><a class="page-link"  ng-click="pager.first()">Previous</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.prev()">Prev</a></li>
+      <li class="page-item"><a class="page-link"  >{{pager.page + 1}} of {{pager.count}}</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.next()">Next</a></li>
+      <li class="page-item"><a class="page-link"  ng-click="pager.last()">Last</a></li>
+    </ul>-->
+    <div style="margin-left: 20px;">
+      <label for="search">Xem:</label>
+          <select style="height: 40px;" ng-model="pageSize" ng-options="num for num in [5, 10, 15,20]" ></select>
+    </div>
+  </nav> 
+
+
+
+   <!-- Modal -->
+   <div class="modal fade" id="deleteItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Xóa Loại hàng</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span>Bạn có muốn xóa <b>"{{message}}"</b></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="hidden" ng-value="clickedItem.id">
+          <button type="button" class="btn btn-danger"  data-dismiss="modal" ng-click="delete(clickedItem)">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

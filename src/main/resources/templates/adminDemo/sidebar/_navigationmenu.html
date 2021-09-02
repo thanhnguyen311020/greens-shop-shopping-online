@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="sidebar" >
+		<div class="logo_content">
+			<div class="logo">
+				<div class="logo_name">PoLy-Shop</div>
+			</div>
+			<i class="fa fa-bars" id="btn" aria-hidden="true"></i>
+		</div>
+		<ul class="nav_list">
+			<li><a href="#"> <i class="fa fa-search" aria-hidden="true"></i>
+					<input type="text" placeholder="Search...">
+				</a> <span class="tooltip">Seach</span></li>
+			<li><a th:href="@{/admin/dashboad}"> <i class="fa fa-bar-chart" aria-hidden="true"></i>
+					<span class="links_name">Thống Kê</span>
+				</a> <span class="tooltip">Thống Kê</span></li>
+			<li><a th:href="@{/admin/orderManage/listOrders}"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> <span
+						class="links_name">Đơn Hàng</span>
+				</a> <span class="tooltip">Đơn Hàng</span></li>
+			<li><a th:href="@{/admin/productManage/viewSearch}"> <i class="fa fa-product-hunt"
+						aria-hidden="true"></i> <span class="links_name">Sản Phẩm</span>
+				</a> <span class="tooltip">Products</span></li>
+			<li><a th:href="@{/admin/categories/searchpaginated}"> <i class="fa fa-product-hunt" aria-hidden="true"></i>
+					<span class="links_name">Loại Sản Phẩm</span>
+				</a> <span class="tooltip">Loại Sản Phẩm</span></li>
+			<li><a th:href="@{/admin/customerManage/viewSearch}"> <i class="fa fa-user-o" aria-hidden="true"></i>
+					<span class="links_name">Khách Hàng</span>
+				</a> <span class="tooltip">Khách Hàng</span></li>
+
+			<li><a th:href="@{/admin/accountManage/viewAccount}"> <i class="fa fa-user-circle" aria-hidden="true"></i>
+					<span class="links_name">Người Dùng</span>
+				</a> <span class="tooltip">Người Dùng</span></li>
+		</ul>
+
+		<div class="profile_content">
+			<div class="profile">
+				<div class="profile_details">
+					<img src="" alt="">
+					<div class="name_job">
+						<divclass="name">Thanh Nguyen</divclass=>
+						<div class="job" >User</div>
+					</div>
+				</div>
+				<a th:href="@{/alogout}">
+				<i class="fa fa-sign-out" id="log_out" aria-hidden="true"></i></a>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

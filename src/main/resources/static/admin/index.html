@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Angular JS -->
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- light-slider-css -->
+    <link rel="stylesheet" href="/css/lightslider.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/JQuery.js"></script>
+    <!-- light-slider-js -->
+    <script src="/js/lightslider.js"></script>
+    <link rel="stylesheet" href="../css/dashBoard.css">
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <!-- <link rel="shortcut icon" href=""> -->
+    <!-- using fontAwesome -->
+    <script src="http://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+
+   
+        <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+      <!--  <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">-->
+ 
+</head>
+
+<body ng-app="admin-app">
+
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <div class="logo_name">Greens</div>
+            </div>
+            <i class="fa fa-bars" id="btn" aria-hidden="true"></i>
+        </div>
+        <ul class="nav_list">
+            <li><a href="#"> <i class="fa fa-search" aria-hidden="true"></i>
+                    <input type="text" placeholder="Search...">
+                </a> <span class="tooltip">Seach</span></li>
+            <li><a href="#!dashboard"> <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                    <span class="links_name">Thống Kê</span>
+                </a> <span class="tooltip">Thống Kê</span></li>
+            <li><a href="#!order"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                    <span class="links_name">Đơn Hàng</span>
+                </a> <span class="tooltip">Đơn Hàng</span></li>
+            <li><a href="#!product"> <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    <span class="links_name">Sản Phẩm</span>
+                </a> <span class="tooltip">Products</span></li>
+            <li><a href="#!categories"> <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                    <span class="links_name">Loại Sản Phẩm</span>
+                </a> <span class="tooltip">Loại Sản Phẩm</span></li>
+            <li><a href="#!account"> <i class="fa fa-user-o" aria-hidden="true"></i>
+                    <span class="links_name">Khách Hàng</span>
+                </a> <span class="tooltip">Khách Hàng</span></li>
+
+            <li><a href="#!authority"> <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    <span class="links_name">Vai Trò</span>
+                </a> <span class="tooltip">Vai Tr</span></li>
+        </ul>
+
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <img src="" alt="">
+                    <div class="name_job">
+                        <div class="name">[[${message}]]</div>
+                        <div class="job">User</div>
+                    </div>
+                </div>
+                <a href="/greens/security/logout">
+                    <i class="fa fa-sign-out" id="log_out" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+    </div>
+   
+    <div class="ng-view home_content"></div>
+
+
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+        let search = document.querySelector(".fa-search");
+
+        btn.onclick = function () {
+            sidebar.classList.toggle("active");
+        }
+        search.onclick = function () {
+            sidebar.classList.toggle("active");
+        }
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#image').change(function () {
+                showImageThumbnail(this);
+            });
+        });
+
+        function showImageThumbnail(fileInput) {
+            file = fileInput.files[0];
+            reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#thumbnail').attr('src', e.target.result);
+            };
+
+            reader.readAsDataUrl(file);
+        }
+
+    </script>
+    <script src="admin-app.js"></script>
+    <script src="product/product-ctrl.js"></script>
+    <script src="category/categories-ctrl.js"></script>
+    <script src="order/order-ctrl.js"></script>
+    <script src="detail/detail-ctrl.js"></script>
+    <script src="account/account-ctrl.js"></script>
+    <script src="dashboard/dashboard-ctrl.js"></script>
+    <script src="authority/authority-ctrl.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

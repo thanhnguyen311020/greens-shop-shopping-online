@@ -1,0 +1,44 @@
+<div class="text">
+    <div class="logo_name"> <i class="fa fa-product-hunt" aria-hidden="true"></i> Thiết Lập Vai Trò (admin)</div>
+
+</div>
+
+
+<div class="view_list">
+
+
+
+    <table>
+        <div class="serch_form">
+            <div>
+                <a class="btn float-left">Thêm Mới Sản Phẩm</a>
+            </div>
+            <form>
+                <div style="float: right; margin-bottom: 10px;" class="form-inline">
+                    <input type="text" class="form-control" id="namec" placeholder="Search..."></input>
+                    <button class="btn ">Search</button>
+                </div>
+            </form>
+        </div>
+        <div>
+            <small></small>
+        </div>
+        <tr id="header">
+            <th>No.</th>
+            <th ng-repeat="role in roles">{{role.name}}</th>
+
+        </tr>
+
+
+
+        <tr ng-repeat="acc in admins">
+            <td scope="row">{{acc.fullname}}</td>
+            <td ng-repeat="role in roles">
+                <input type="checkbox" ng-checked="authority_of(acc,role)" ng-click="authority_changed(acc,role)">
+            </td>
+
+        </tr>
+
+
+    </table>
+</div>

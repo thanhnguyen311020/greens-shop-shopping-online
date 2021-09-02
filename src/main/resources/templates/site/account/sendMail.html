@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/site/layout/index :: dynamic(~{::main})}">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <main>
+
+
+        <!-- Single product details  -->
+        <div class="small_container single-product">
+            <div class="_row" >
+                <div class="col_12">
+                    <h2>Fogot password</h2>
+                </div>
+                <div class="col_12">
+                    <form th:action="@{/greens/forgotPassword}" method="POST">
+                        <p>We will be sending the reset password  link to yout email</p>
+                        <p>[[${error}]]</p>
+                        <div>
+                            <span>Email</span>
+                            <input type="text" name="email" id="email" style="width: 100%;">
+
+                            <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                        </div>
+                        <div style="margin-top: 20px;">
+
+                            <input type="submit"
+                                value="Gửi Yêu Cầu" style="width: 100%; background-color: #0b9d8a; color: #ffffff;" >
+
+                            <!--     <input style="width: 100%;" th:field="*{customer.customerId}" type="text"> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+    </main>
+
+</body>
+
+</html>

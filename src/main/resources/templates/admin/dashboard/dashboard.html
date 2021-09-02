@@ -1,0 +1,164 @@
+<div class="text">
+    <div class="logo_name"> <i class="fa fa-bar-chart" aria-hidden="true"></i> Thống Kê</div>
+
+</div>
+<!-- <header>
+            <h1>
+                <label for="">
+                    <i class="fa fa-bars" id="btn" aria-hidden="true"></i>
+                </label>
+                Dashboard
+            </h1>
+            <div class="search_wrapper">
+                <span class="fa fa-bars" id="btn" aria-hidden="true"></span>
+                <input type="search" placeholder="Search here" />
+            </div>
+
+            <div class="user_wrapper">
+                <img src="" alt="">
+                <div>
+                    <h4>Jone Doe</h4>
+                    <small>SuperAdmin</small>
+                </div>
+            </div>
+        </header> -->
+
+<main>
+    <div class="cards">
+
+        <div class="card_single">
+            <div>
+                <h1 ng-bind="count"></h1>
+                <span>Khách Hàng</span>
+            </div>
+            <div>
+                <span class="fa fa-user-o" aria-hidden="true"></span>
+            </div>
+        </div>
+        <div class="card_single">
+            <div>
+                <h1 ng-bind="countProduct"></h1>
+                <span>Sản Phẩm</span>
+            </div>
+            <div>
+                <span class="fa fa-product-hunt" aria-hidden="true"></span>
+            </div>
+        </div>
+        <div class="card_single">
+            <div>
+                <h1 ng-bind="countOrder">22</h1>
+                <span>Đơn Hàng</span>
+            </div>
+            <div>
+                <span class="fa fa-cart-arrow-down" aria-hidden="true"></span>
+            </div>
+        </div>
+        <div class="card_single">
+            <div>
+                <h1 ng-bind="amountMonth | currency:''">$9k</h1>
+                <span>Doanh Thu</span>
+            </div>
+            <div>
+                <span class="fa " id="btn" aria-hidden="true"> .đ</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="recent_flex">
+        <div class="projects">
+            <div class="card" style="height: 400px; width: auto;">
+                <div id="chartContainer" style="height: auto; width: auto;">
+                    <!-- <div id="chartContainer" style="height: 300px; width: 100%;"></div> -->
+                    <div>
+                        <h1>Hello</h1>
+
+                        <table>
+                            <td>
+                                <div id="piechart_3d" style="border: 1px solid black;">
+
+                                </div>
+                            </td>
+                            <td>
+                                <div id="barchart_div" style="border: 1px solid black;">
+
+                                </div>
+                            </td>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Lịch Sử Bản Hàng</h3>
+                    <input ng-init="getDateStart" ng-model="getDateStart" id="start" type="date">
+                    <input type="date" ng-init="getDateEnd" ng-model="getDateEnd" id="end">
+                    <button ng-click="getOrderDetailBetweenDate()">See All <span class="fa fa-bars" id="btn"
+                            aria-hidden="true"></span></button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Mã Đơn</td>
+                                    <td>Khách Hàng</td>
+                                    <td>Sản Phẩm</td>
+                                    <td>Số Lượng</td>
+                                    <td>Thành Tiền</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-show="!orderDetails.length">
+                                    <td colspan="5">Không có dữ liệu</td>
+
+
+
+                                </tr>
+                                <tr ng-show="orderDetails.length "
+                                    ng-repeat="item in orderDetails | orderBy : 'order.createDate' : true">
+                                    <td>{{item.order.id}}</td>
+                                    <td>{{item.account.username}}</td>
+                                    <td>{{item.product.name}}</td>
+                                    <td>{{item.quantity}}</td>
+                                    <td>{{item.price}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div id="chart_div"></div>
+            </div>
+        </div>
+        <div class="customers">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Top Sản Phẩm</h3>
+                    <button>Xem <span class="fa fa-bars" id="btn" aria-hidden="true"></span></button>
+                </div>
+                <div class="card-body">
+                    <div class="customer" ng-repeat="item in topPoduct">
+                        <div class="info">
+                            <img ng-src="/images/{{item.product.image}}" height="40px" width="40px" alt="">
+                            <div>
+                                <h4>{{item.product.name}}</h4>
+                                <small>Lượt mua: {{item.sumOrder}}</small>
+                            </div>
+                        </div>
+                        <div class="contact">
+                            <span class="fa fa-bars" id="btn" aria-hidden="true"></span>
+                            <span class="fa fa-bars" id="btn" aria-hidden="true"></span>
+                            <span class="fa fa-bars" id="btn" aria-hidden="true"></span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
