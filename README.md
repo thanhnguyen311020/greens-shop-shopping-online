@@ -36,16 +36,16 @@
 
 ---
 ## Image 
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/home.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/product.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/productDertails.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/cart.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/login.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/Order.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/orderDetails.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/Dashboard.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/chart.png" />
-<img align="left" alt="Node.js" width="26px" src="/imgREAME/list.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/home.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/product.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/productDertails.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/cart.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/login.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/Order.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/orderDetails.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/Dashboard.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/chart.png" />
+<img align="left" alt="Node.js" width="100%" src="/imgREAME/list.png" />
 
 [facebook]: https://www.facebook.com/profile.php?id=100009907901608
 [instagram]: https://www.instagram.com/ndt_ved/
